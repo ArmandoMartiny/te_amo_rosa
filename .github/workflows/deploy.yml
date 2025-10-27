@@ -20,21 +20,18 @@ jobs:
         with:
           node-version: '20'
 
-      # 3. Instalar dependencias (¡SOLUCIÓN!)
-      - name: Install Dependencies
-        run: npm ci --force
+      # 3. Instalar dependencias (¡SOLUCIÓN FINAL!)
+      - name: Install Dependencies (Forzado y No Interactivo)
+        # --yes responde 'yes' a cualquier pregunta que haga npm, solucionando el error.
+        run: npm ci --yes
 
-      # 4. Forzar instalación de webpack-cli para evitar la pregunta interactiva
-      - name: Install Webpack-CLI (Fix Interactive Error)
-        run: npm install -D webpack-cli --silent
-
-      # 5. Construir la Aplicación
+      # 4. Construir la Aplicación
       - name: Build Angular Project
         run: npm run deploy:gh
 
-      # 6. Desplegar a GitHub Pages
+      # 5. Desplegar a GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/proyecto-rosa-maria/browser # Ajusta la ruta a tu carpeta de salida
+          publish_dir: ./dist/proyecto-rosa-maria/browser
