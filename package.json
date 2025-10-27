@@ -7,6 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "deploy:gh": "ng build --base-href=https://ArmandoMartiny.github.io/proyecto-rosa-maria/",
     "serve:ssr:proyecto-rosa-maria": "node dist/proyecto-rosa-maria/server/server.mjs"
   },
   "prettier": {

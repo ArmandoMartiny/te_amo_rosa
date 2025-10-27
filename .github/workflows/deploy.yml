@@ -1,0 +1,37 @@
+name: Despliegue a GitHub Pages
+
+on:
+  push:
+    branches:
+      - master  # O 'main', si ese es el nombre de tu rama principal
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Configurar Node.js (asegúrate de que la versión coincida con tu Angular)
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Angular 20 usa Node 20
+
+      # 3. Instalar dependencias
+      - name: Install Dependencies
+        run: npm ci
+
+      # 4. Construir la Aplicación (Usando el script 'deploy:gh' del package.json)
+      - name: Build Angular Project
+        run: npm run deploy:gh
+
+      # 5. Desplegar a GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/proyecto-rosa-maria/browser # Ajusta la ruta a tu carpeta de salida
+          # La ruta de salida puede ser solo ./dist/proyecto-rosa-maria si no usaste SSR
