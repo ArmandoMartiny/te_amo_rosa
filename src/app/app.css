@@ -1,0 +1,112 @@
+/* --- Contenedor Principal y Fondo --- */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ocupa toda la pantalla */
+  background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+  font-family: 'Georgia', 'Times New Roman', serif;
+  overflow: hidden; /* Evita barras de scroll */
+  position: relative;
+}
+
+/* --- La Tarjeta del Mensaje --- */
+.tarjeta {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5rem 3.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  z-index: 10; /* Se pone delante de las animaciones */
+  position: relative;
+  animation: fadeIn 1.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+  color: #d6336c; /* Rosa intenso */
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.poema {
+  color: #444;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  font-style: italic;
+  margin: 0;
+}
+
+/* --- Contenedor de Animaciones --- */
+.animaciones-fondo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Detrás de la tarjeta */
+}
+
+/* --- Animación Base (Flotar) --- */
+@keyframes flotar {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh);
+    opacity: 0;
+  }
+}
+
+/* --- Estilo Base de Animación --- */
+.corazon, .flor {
+  position: absolute;
+  bottom: -100px; /* Empiezan abajo */
+  animation: flotar linear infinite;
+  opacity: 0;
+}
+
+/* --- 1. La Forma del Corazón (Puro CSS) --- */
+.corazon {
+  width: 20px;
+  height: 20px;
+  background-color: #ff4757;
+  opacity: 0.7;
+  transform: rotate(-45deg);
+}
+
+.corazon::before,
+.corazon::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ff4757;
+  border-radius: 50%;
+}
+
+.corazon::before {
+  top: -10px;
+  left: 0;
+}
+
+.corazon::after {
+  top: 0;
+  left: 10px;
+}
+
+/* --- 2. La Forma de la Flor (Emoji) --- */
+.flor {
+  font-size: 1.5rem;
+  opacity: 0.7;
+}
+
+.flor::before {
+  content: '🌸';
+}
